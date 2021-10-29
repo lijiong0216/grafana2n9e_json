@@ -1,0 +1,19 @@
+[
+  {
+    "id": 0,
+    "name": "type_ur_graph_name_here",
+    "tags": "",
+    "configs": "{\"tags\":[]}",
+    "chart_groups": [
+      {
+        "id": 0,
+        "dashboard_id": 0,
+        "name": "Default chart group",
+        "weight": 0,
+        "charts": [
+
+        ]
+      }
+    ]
+  }
+]
