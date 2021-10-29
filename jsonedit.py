@@ -42,6 +42,7 @@ with open('grafana.json', 'r', encoding = 'utf-8') as f:
                     # dict2["prome_ql"] = [data["panels"][i]["targets"][j]["expr"]]
                     dict2["prome_ql"] = re.sub("podname", "pod_name", data["panels"][i]["targets"][j]["expr"])
                     str_dict2 = re.sub("\"", "\\"+"\"", dict2["prome_ql"])
+                    str_dict2 = re.sub("\$__interval", "2m", str_dict2)
                     # list_prome_ql = []
                     list_prome_ql.append(str_dict2)
                     print("list_prome_ql.append(str_dict2):_________", list_prome_ql)
