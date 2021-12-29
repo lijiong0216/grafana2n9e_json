@@ -41,10 +41,12 @@ if __name__ == '__main__':
                     elif type(j["current"]["value"]) == list:
                         value_in = j["current"]["value"][0]
                     if type(j["query"]) == str:
-                        configs_in = {"name": j["name"], "selected": re.sub("\$__", "", value_in), "definition": j["query"], "multi": False, "reg": "", "allOption": False}
+                        value_in = re.sub("=", "=~", value_in)
+                        configs_in = {"name": j["name"], "selected": re.sub("\$__all", ".*", value_in), "definition": j["query"], "multi": False, "reg": "", "allOption": False}
                         # print("str")
                     else:
-                        configs_in = {"name": j["name"], "selected": re.sub("\$__", "", value_in), "definition": j["query"]["query"], "multi": False, "reg": "", "allOption": False}
+                        value_in = re.sub("=", "=~", value_in)
+                        configs_in = {"name": j["name"], "selected": re.sub("\$__all", ".*", value_in), "definition": j["query"]["query"], "multi": False, "reg": "", "allOption": False}
                     list_configs_in.append(configs_in)
             dict_configs_in = {"var": list_configs_in}
             str_configs_in = json.dumps(dict_configs_in)
@@ -55,20 +57,20 @@ if __name__ == '__main__':
             y = 0
             layout = {"h": 2, "w": 6, "x": x, "y": y, "i": str(count)}
             has_group_name = False
-            data_n9ev5_done_chart_groups = copy.deepcopy(data_n9ev5_done["chart_groups"][0])
+            data_n9ev5_done_chart_groups = copy.deepcopy(data_n9ev5_done["chart_groups"])
             data_n9ev5_done["chart_groups"] = []
             for k in i["panels"]:
                 if k["type"] == "row":
                     print("\033[1;35m k_title: \033[0m", k)
-                    data_n9ev5_group_done = process("name", k["title"], data_n9ev5_done_chart_groups)
+                    data_n9ev5_group_done = process("name", k["title"], data_n9ev5_done_chart_groups[0])
                     data_n9ev5_done["chart_groups"].append(data_n9ev5_group_done)
                     group_name = k["title"]
                     has_group_name = True
-            if not has_group_name:
-                data_n9ev5_done["chart_groups"].append(data_n9ev5_done_chart_groups)
-
-            for k in i["panels"]:
-                if k["type"] == "graph":
+                elif k["type"] == "graph":
+                    if not has_group_name:
+                        data_n9ev5_done["chart_groups"].append(data_n9ev5_done_chart_groups[0])
+                        # print("done")
+                        has_group_name = True
                     layout = {"h": 2, "w": 6, "x": x, "y": y, "i": str(count)}
                     count = count + 1
                     list_prom_ql = []
@@ -81,13 +83,19 @@ if __name__ == '__main__':
                     data_n9ev5_chart_done = process("configs", str_configs_chart_in, data_n9ev5_done["chart_groups"][0]["charts"][0])
                     # data_n9ev5_done_chart = copy.deepcopy(data_n9ev5_done["chart_groups"][m]["charts"])
                     # data_n9ev5_done["chart_groups"][m]["charts"] = []
+                    print("data_n9ev5_donechart_groups:", data_n9ev5_done["chart_groups"])
                     for m in range(len(data_n9ev5_done["chart_groups"])):
+                        print("m: ", m)
                         if data_n9ev5_done["chart_groups"][m]["name"] == group_name:
                             data_n9ev5_done["chart_groups"][m]["charts"].append(data_n9ev5_chart_done)
                     x = x + 6
                     if count % 4 == 3:
                         x = 0
                         y = y + 2
+
+
+            # for k in i["panels"]:
+
 
             for mm in data_n9ev5_done["chart_groups"]:
                 del mm["charts"][0]

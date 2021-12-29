@@ -55,15 +55,10 @@
   {
     "name": "skywalking",
     "tags": "",
-    "configs": "{\"var\": [{\"name\": \"appid\", \"selected\": \"ares-service\", \"definition\": \"label_values(skywalking_total,ApplyName)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}, {\"name\": \"uri\", \"selected\": \"all\", \"definition\": \"label_values(skywalking_total{ApplyName=~\\\"$appid\\\"},InstanceName)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}]}",
+    "configs": "{\"var\": [{\"name\": \"appid\", \"selected\": \"ares-service\", \"definition\": \"label_values(skywalking_total,ApplyName)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}, {\"name\": \"uri\", \"selected\": \".*\", \"definition\": \"label_values(skywalking_total{ApplyName=~\\\"$appid\\\"},InstanceName)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}]}",
     "chart_groups": [
       {
         "name": "服务层",
-        "weight": 0,
-        "charts": []
-      },
-      {
-        "name": "URI层",
         "weight": 0,
         "charts": [
           {
@@ -81,7 +76,13 @@
           {
             "configs": "{\"name\": \"\\u8c03\\u7528\\u8017\\u65f6\", \"QL\": [{\"PromQL\": \"skywalking_avg{valuetype=\\\"service\\\",ApplyName=~\\\"$appid\\\"}\"}, {\"PromQL\": \"skywalking_p50{valuetype=\\\"service\\\",ApplyName=~\\\"$appid\\\"}\"}, {\"PromQL\": \"skywalking_p75{valuetype=\\\"service\\\",ApplyName=~\\\"$appid\\\"}\"}, {\"PromQL\": \"skywalking_p90{valuetype=\\\"service\\\",ApplyName=~\\\"$appid\\\"}\"}, {\"PromQL\": \"skywalking_p99{valuetype=\\\"service\\\",ApplyName=~\\\"$appid\\\"}\"}], \"legend\": false, \"highLevelConifg\": {\"shared\": true, \"sharedSortDirection\": \"desc\", \"precision\": \"short\", \"formatUnit\": 1000}, \"version\": 1, \"layout\": {\"h\": 2, \"w\": 6, \"x\": 0, \"y\": 2, \"i\": \"3\"}}",
             "weight": 0
-          },
+          }
+        ]
+      },
+      {
+        "name": "URI层",
+        "weight": 0,
+        "charts": [
           {
             "configs": "{\"name\": \"uri\\u8c03\\u7528\\u8be6\\u60c5\", \"QL\": [{\"PromQL\": \"skywalking_total{valuetype=\\\"endpoint\\\",ApplyName=~\\\"$appid\\\",InstanceName=~\\\"$uri\\\"}\"}], \"legend\": false, \"highLevelConifg\": {\"shared\": true, \"sharedSortDirection\": \"desc\", \"precision\": \"short\", \"formatUnit\": 1000}, \"version\": 1, \"layout\": {\"h\": 2, \"w\": 6, \"x\": 6, \"y\": 2, \"i\": \"4\"}}",
             "weight": 0
@@ -105,7 +106,7 @@
   {
     "name": "业务日志",
     "tags": "",
-    "configs": "{\"var\": [{\"name\": \"appid\", \"selected\": \"all\", \"definition\": \"label_values(app_except_error,appid)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}, {\"name\": \"ex_name\", \"selected\": \"all\", \"definition\": \"label_values(app_except_error{appid=~\\\"$appid\\\"},ex_name)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}]}",
+    "configs": "{\"var\": [{\"name\": \"appid\", \"selected\": \".*\", \"definition\": \"label_values(app_except_error,appid)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}, {\"name\": \"ex_name\", \"selected\": \".*\", \"definition\": \"label_values(app_except_error{appid=~\\\"$appid\\\"},ex_name)\", \"multi\": false, \"reg\": \"\", \"allOption\": false}]}",
     "chart_groups": [
       {
         "name": "Default chart group",
