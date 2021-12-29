@@ -1,0 +1,19 @@
+[
+  {
+    "name": "1",
+    "tags": "",
+    "configs": "{\"var\":[{\"name\":\"application\",\"selected\":\"menu-service\",\"definition\":\"label_values(application)\"},{\"selected\":\"menu-service-3b3df-85bdb9479b-4pxgw\",\"name\":\"podname\",\"multi\":false,\"reg\":\"\",\"definition\":\"label_values(pod_name)\",\"allOption\":false}]}",
+    "chart_groups": [
+      {
+        "name": "Default chart group",
+        "weight": 0,
+        "charts": [
+          {
+            "configs": "{\"name\":\"2\",\"QL\":[{\"PromQL\":\"logback_events_total{pod_name=\\\"$podname\\\"}\"}],\"legend\":false,\"highLevelConfig\":{\"shared\":true,\"sharedSortDirection\":\"desc\",\"precision\":\"short\",\"formatUnit\":1000},\"version\":1,\"layout\":{\"h\":2,\"w\":6,\"x\":6,\"y\":0,\"i\":\"1\"}}",
+            "weight": 0
+          }
+        ]
+      }
+    ]
+  }
+]
